@@ -1,0 +1,18 @@
+version = 1
+
+test_patterns = [
+  "*.py"
+]
+[[analyzers]]
+name = "python"
+enabled = true
+runtime_version = "3.x.x"
+
+  [analyzers.meta]
+  max_line_length = 90
+
+# Test coverage analyzer
+[[analyzers]]
+name = "test-coverage"
+enabled = true
+© 2020 GitHub, Inc.
