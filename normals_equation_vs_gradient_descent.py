@@ -21,9 +21,6 @@ Y = data.iloc[:, 1].values
 X_temp = X.copy()
 y_temp = Y.copy()
 #. look at the shapes
-Y.shape
-
-X.shape
 
 """Normal Equation doesn't need feature normalization"""
 
@@ -49,8 +46,6 @@ part2 = transpose.dot(Y)
 #.  define the weights vector
 weights = np.matmul(part1,part2)
 
-# bias and the weight
-weights
 
 #.  get the predicted by multiplying the matrix(X) and the vector (weights)
 predicted_y = X.dot(weights)
@@ -86,7 +81,7 @@ model = LinearRegression().fit(X,Y)
 model.score(X,Y)
 
 y_predicted = model.predict(X)
-y_predicted[0:10]
+
 
 """Pretty close"""
 
