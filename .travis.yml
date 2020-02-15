@@ -5,7 +5,7 @@ install:
   - pip install requests
   - pip install -r requirements.txt
 script:
-  - python3 app.py
+  - python3 normals_equation_vs_gradient_descent.py
 after_success:
   - coverage xml
   - curl https://deepsource.io/cli | sh
