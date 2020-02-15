@@ -19,7 +19,8 @@ data = pd.read_excel("LR_ML.xlsx",sheet_name=0)
 X = data.iloc[:, 0].values
 #. read the second column
 Y = data.iloc[:, 1].values
-
+X_temp = X.copy()
+y_temp = Y.copy()
 #. look at the shapes
 Y.shape
 
