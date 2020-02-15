@@ -15,4 +15,3 @@ runtime_version = "3.x.x"
 [[analyzers]]
 name = "test-coverage"
 enabled = true
-© 2020 GitHub, Inc.
