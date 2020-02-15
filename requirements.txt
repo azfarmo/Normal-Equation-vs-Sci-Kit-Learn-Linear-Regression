@@ -1,4 +1,5 @@
 numpy
 pandas
 sklearn
+xlrd >= 1.0.0
 matplotlib
