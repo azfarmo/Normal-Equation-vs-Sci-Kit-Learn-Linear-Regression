@@ -1,1 +1,1 @@
-# Normal-Equation-vs-Linear-Regression
+# Normal-Equation-vs-Sci-kit-Learn-Linear-Regression
