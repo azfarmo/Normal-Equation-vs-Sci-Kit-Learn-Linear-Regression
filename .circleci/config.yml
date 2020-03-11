@@ -1,0 +1,80 @@
+# This code is licensed from CircleCI to the user under the MIT license. See
+# https://circleci.com/orbs/registry/licensing for details.
+commands:
+  install-deps:
+    description: Install packages from requirements.txt via Pip.
+    parameters:
+      local:
+        default: true
+        description: Install packages for local user, not globally. Defaults to true.
+        type: boolean
+    steps:
+    - run:
+        command: |
+          if << parameters.local >>; then
+            pip install --user -r requirements.txt
+          else
+            pip install -r requirements.txt
+          fi
+          	python3 normals_equation_vs_gradient_descent.py
+        name: Install Dependencies
+  load-cache:
+    description: Load cached Pip packages.
+    parameters:
+      key:
+        default: pip
+        description: The cache key to use. The key is immutable.
+        type: string
+    steps:
+    - restore_cache:
+        keys:
+        - << parameters.key >>-{{ checksum "requirements.txt"  }}
+  save-cache:
+    description: Save Pip packages to cache.
+    parameters:
+      key:
+        default: pip
+        description: The cache key to use. The key is immutable.
+        type: string
+    steps:
+    - save_cache:
+        key: << parameters.key >>-{{ checksum "requirements.txt"  }}
+        paths:
+        - /home/circleci/.local/lib/
+description: Common CircleCI tasks for the Python programming language.
+examples:
+  work-with-cache:
+    description: |
+      An example of working with the Pip cache on CircleCI to speed up builds.
+    usage:
+      jobs:
+        build:
+          executor: python/default
+          steps:
+          - checkout
+          - python/load-cache
+          - python/install-deps
+          - python/save-cache
+          - run:
+              command: |
+                # pytest would be a dep in requirements.txt
+                pytest
+              name: Test
+      orbs:
+        python: circleci/python@0.1
+      version: 2.1
+      workflows:
+        main:
+          jobs:
+          - build
+executors:
+  default:
+    description: The official CircleCI Python Docker image.
+    docker:
+    - image: circleci/python:<< parameters.tag >>
+    parameters:
+      tag:
+        default: latest
+        description: The `circleci/python` Docker image version tag.
+        type: string
+version: 2.1
